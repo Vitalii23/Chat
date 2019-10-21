@@ -33,9 +33,19 @@
             </plugin>
 
             <plugin>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>8.0.17</version>
+                <!-- Build an executable JAR -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.2</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>apache.info.ru.Main.Socketor</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
             </plugin>
 
             <plugin>
@@ -52,7 +62,7 @@
                         <transformers>
                         <transformer
                             implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                            <mainClass>apache.info.ru.Socketor.Socketor</mainClass>
+                            <mainClass>apache.info.ru.Main.Socketor</mainClass>
                         </transformer>
                         </transformers>
                     </configuration>

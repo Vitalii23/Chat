@@ -1,4 +1,4 @@
-package apache.info.ru.Socketor;
+package apache.info.ru.Main;
 import apache.info.ru.ClientSocket.Client;
 import apache.info.ru.ServerSocket.Server;
 
@@ -6,8 +6,8 @@ public class Socketor {
     public static void main(String[] args) {
         if (args.length < 3) {
             System.out.println("Usage:\r\n" +
-                    "java apache.info.ru.Socketor.Socketor server 8000 \r\n" +
-                    "java apache.info.ru.Socketor.Socketor client 127.0.0.1 8000");
+                    "java apache.info.ru.Main.Socketor server 8000 \r\n" +
+                    "java apache.info.ru.Main.Socketor client 127.0.0.1 8000");
             return;
         }
         Server server = new Server();
