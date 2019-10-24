@@ -10,7 +10,7 @@ public class JDBC {
 
     private static Connection connection;
     private static Statement statement;
-    //private static ResultSet resultSet;
+    private static ResultSet resultSet;
 
     // insert
     public void insert(String line) {
@@ -27,7 +27,24 @@ public class JDBC {
             try { connection.close(); } catch (SQLException se) {/*can't do anything */ }
             try { statement.close(); } catch (SQLException se) { /*can't do anything */ }
         }
-
     }
 
+    public void select(){
+        String sql = "SELECT text FROM archive";
+        try {
+            connection = DriverManager.getConnection(url, user, password);
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(sql);
+            while(resultSet.next()){
+                String text = resultSet.getString(1);
+                System.out.println(text + "\n");
+            }
+        } catch (SQLException sqlEx) {
+            sqlEx.printStackTrace();
+        } finally {
+            try { connection.close(); } catch (SQLException se) {/*can't do anything */ }
+            try { statement.close(); } catch (SQLException se) { /*can't do anything */ }
+            try { resultSet.close(); } catch (SQLException se) { /*can't do anything */ }
+        }
+    }
 }

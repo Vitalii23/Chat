@@ -1,5 +1,7 @@
 package apache.info.ru.Worker;
 
+import apache.info.ru.DataBase.JDBC;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -9,6 +11,8 @@ public class Worker {
     private Socket client;
     private BufferedReader reader;
     private BufferedWriter writer;
+
+    JDBC jdbc = new JDBC();
 
     public Worker(String port){ // server
         try{
@@ -27,6 +31,7 @@ public class Worker {
     public Worker(String ip, String port){ // client
         try{
             client = new Socket(ip, Integer.parseInt(port));
+            jdbc.select();
             createStreams();
         } catch (IOException e){
             throw new RuntimeException(e);
@@ -74,7 +79,7 @@ public class Worker {
         }
     }
 
-    public  void close(){
+    public void close(){
         try {
             reader.close();
             writer.close();
@@ -84,6 +89,7 @@ public class Worker {
         }
     }
 
+
     public void closeServer(){
         try {
             server.close();
@@ -91,5 +97,4 @@ public class Worker {
             throw new RuntimeException(e);
         }
     }
-
 }
