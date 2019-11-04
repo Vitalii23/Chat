@@ -6,15 +6,14 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class WriteTread extends Thread {
+public class WriteThread extends Thread {
         private Socket socket;
         private Client client;
         private PrintWriter writer;
 
-        public WriteTread(Socket socket, Client client) {
+        public WriteThread(Socket socket, Client client) {
             this.socket = socket;
             this.client = client;
-
             try{
                 writer =
                         new PrintWriter(
@@ -28,7 +27,6 @@ public class WriteTread extends Thread {
 
         Thread wtt = new Thread(() -> {
             Console console = System.console();
-
             String userName = console.readLine("\nEnter your name: ");
             client.setUserName(userName);
             writer.println(userName);
@@ -46,5 +44,4 @@ public class WriteTread extends Thread {
                 System.out.println("Error writing to server: " + e.getMessage());
             }
         });
-
 }

@@ -20,8 +20,8 @@ public class Client {
             System.out.println("Connected to the chat server");
             ReadThread readThread = new ReadThread(socket, this);
             readThread.rtt.start();
-            WriteTread writeTread = new WriteTread(socket, this);
-            writeTread.wtt.start();
+            WriteThread writeThread = new WriteThread(socket, this);
+            writeThread.wtt.start();
         } catch (UnknownHostException e) {
             System.out.println("Server not found: " + e.getMessage());
         } catch (IOException e) {
