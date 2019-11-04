@@ -1,24 +1,40 @@
 package apache.info.ru.ClientSocket;
 
-import apache.info.ru.Worker.Worker;
-
-import java.util.Scanner;
+import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
 
 public class Client {
-    public void runClient(String ip, String port) {
-        Worker worker = new Worker(ip, port);
-        Scanner string = new Scanner(System.in);
-        System.out.println("Message: ");
-        String line = string.nextLine();
-        if (line.equals("-r")){
-            String comand = string.nextLine();
-            StringBuilder buffer = new StringBuilder(comand);
-            buffer.reverse();
-            System.out.println(buffer.toString());
-            worker.writeLine(buffer.toString());
-            worker.close();
-        }
-        worker.writeLine(line);
-        worker.close();
+    private String hostname;
+    private int port;
+    private String userName;
+
+    public Client(String hostname, int port){
+        this.hostname = hostname;
+        this.port = port;
     }
+
+    public void execute(){
+        try{
+            Socket socket = new Socket(hostname, port);
+            System.out.println("Connected to the chat server");
+            ReadThread readThread = new ReadThread(socket, this);
+            readThread.rtt.start();
+            WriteTread writeTread = new WriteTread(socket, this);
+            writeTread.wtt.start();
+        } catch (UnknownHostException e) {
+            System.out.println("Server not found: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("I/O Error: " + e.getMessage());
+        }
+    }
+
+    void setUserName(String userName){
+        this.userName = userName;
+    }
+
+    public String getUserName(){
+        return this.userName;
+    }
+
 }
