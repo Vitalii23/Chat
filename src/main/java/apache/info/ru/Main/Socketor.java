@@ -10,7 +10,7 @@ public class Socketor {
         if(args.length < 1) {
             System.out.println("Usage:\r\n" +
                     "java apache.info.ru.Main.Socketor server\r\n" +
-                    "java apache.info.ru.Main.Socketor client localhost");
+                    "java apache.info.ru.Main.Socketor client");
             return;
         }
         Scanner line = new Scanner(System.in);
