@@ -18,14 +18,14 @@ public class Server {
 
     public void execute(){
         try(ServerSocket server = new ServerSocket(port)){
-            System.out.println("Started Server with " + " on " + port);
+            System.out.println("Started Server with" + " on " + port);
             while(true){
                 Socket socket = server.accept();
                 System.out.println("New user connected");
 
                 UserThread newUser = new UserThread(socket, this);
                 userThreads.add(newUser);
-                newUser.ut.start();
+                newUser.utt.start();
             }
         } catch (IOException e) {
             System.out.println("Error server" + e.getMessage());

@@ -36,5 +36,4 @@ public class Client {
     public String getUserName(){
         return this.userName;
     }
-
 }

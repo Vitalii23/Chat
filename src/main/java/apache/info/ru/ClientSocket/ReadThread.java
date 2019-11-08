@@ -25,8 +25,6 @@ public class ReadThread extends Thread {
         }
     }
 
-
-
     Thread rtt = new Thread(() -> {
         while (true) {
             try {
